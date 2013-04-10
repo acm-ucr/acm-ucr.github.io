@@ -1,0 +1,12 @@
+.reveal table th {
+    text-align: center;
+}
+
+.reveal table td {
+    padding: 10px;
+    text-align: center;
+}
+
+.reveal table td:nth-child(3) {
+    width: 45%;
+}
