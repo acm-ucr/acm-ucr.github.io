@@ -1,3 +1,15 @@
+.exampleTable th{
+    font-weight: bold;
+}
+
+.reveal ol, .reveal ul {
+    width: 100%;
+}
+
+.reveal pre code {
+    word-wrap: break-word;
+}
+
 .reveal table th {
     text-align: center;
 }
@@ -9,4 +21,12 @@
 
 .reveal table td:nth-child(3) {
     width: 45%;
+}
+
+form {
+    font-size: 75% !important;
+}
+
+form input[type="button"], button {
+    font-size: 16px;
 }
