@@ -307,8 +307,11 @@
 	rollingLinks: true,
 
 	// Transition style
-	transition: 'default' // default/cube/page/concave/zoom/linear/fade/none
+	transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
 
+        dependencies : [
+	    { src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+	]
       });
     </script>
     <script type="text/javascript" src="../reveal.js/plugin/markdown/showdown.js"></script>

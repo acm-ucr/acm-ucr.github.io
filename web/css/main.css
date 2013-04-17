@@ -30,3 +30,28 @@ form {
 form input[type="button"], button {
     font-size: 16px;
 }
+
+.hoverDemo {
+    background: #2d6cc0;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.hoverDemo:hover {
+    background: #f1ab00;
+}
+
+.sidebyside {
+    margin-left: 10px !important;
+    float: left;
+}
+
+#content * {
+    color: inherit;
+    text-align: left !important;
+}
+
+#content img {
+    border: none !important;
+}
