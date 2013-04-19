@@ -1,5 +1,108 @@
+@import url(http://fonts.googleapis.com/css?family=Cabin+Sketch);
+
+form {
+    font-size: 75% !important;
+}
+
+form input[type="button"], button {
+    font-size: 16px;
+}
+
+#content * {
+    color: inherit;
+    text-align: left !important;
+}
+
+#content img {
+    border: none !important;
+}
+
+@font-face {
+    font-family: 'avengeance_heroic_avengerRg';
+    src: url('avengeance_heroic_avenger-webfont.eot');
+    src: url('avengeance_heroic_avenger-webfont.eot?#iefix') format('embedded-opentype'),
+         url('avengeance_heroic_avenger-webfont.woff') format('woff'),
+         url('avengeance_heroic_avenger-webfont.ttf') format('truetype'),
+         url('avengeance_heroic_avenger-webfont.svg#avengeance_heroic_avengerRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+#fontExample1 {
+    font-family: 'avengeance_heroic_avengerRg';
+}
+
+#linkExample a {
+    transition: none !important;
+    -webkit-transition: none !important;
+}
+
+#linkExample a:link {
+  color: #2d6cc0;
+  text-decoration: none;
+}
+
+/* Visited links */
+#linkExample a:visited {
+  text-decoration: line-through;
+}
+
+/* On mouse over/hover */
+#linkExample a:hover {
+  color: #f1ab00;
+  text-decoration: underline;
+}
+
+/* As it is being clicked or focused */
+#linkExample a:active {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+#shadowExample {
+    background: white;
+    text-align: center;
+    padding: 15px;
+    border: 1px solid #333;
+
+    box-shadow: 5px 5px 5px #333;
+    text-shadow: 5px 5px 5px #333;
+}
+
+.buttonGroup button {
+    background: #2d6cc0;
+    border: 1px solid #2d6cc0;
+    padding: 15px;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    font-family: Arial !important;
+    box-shadow: 1px 1px 1px  #333;
+    text-shadow: 1px 1px 1px #333;
+}
+
+.buttonGroup button:hover {
+    opacity: 0.7;
+}
+
+.cabin {
+    font-family: 'Cabin Sketch' !important;
+}
+
 .exampleTable th{
     font-weight: bold;
+}
+
+.hoverDemo {
+    background: #2d6cc0;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.hoverDemo:hover {
+    background: #f1ab00;
 }
 
 .reveal ol, .reveal ul {
@@ -23,35 +126,9 @@
     width: 45%;
 }
 
-form {
-    font-size: 75% !important;
-}
-
-form input[type="button"], button {
-    font-size: 16px;
-}
-
-.hoverDemo {
-    background: #2d6cc0;
-    color: white;
-    padding: 15px;
-    font-weight: bold;
-}
-
-.hoverDemo:hover {
-    background: #f1ab00;
-}
 
 .sidebyside {
     margin-left: 10px !important;
     float: left;
 }
 
-#content * {
-    color: inherit;
-    text-align: left !important;
-}
-
-#content img {
-    border: none !important;
-}
