@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HOW DO I SHOT WEB(SITES) - Part 6</title>
+    <link rel="stylesheet" href="../reveal.js/css/reveal.min.css">
+    <link rel="stylesheet" href="../reveal.js/css/theme/beige.css" id="theme">
+    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+	<section>
+	  <img src="http://i.imgur.com/Y1DaqZD.jpg">
+	  <h2>Part 6: Javascript Baby Steps</h2>
+	  <p>
+	    Presented by <br>
+	    <img src="http://i.imgur.com/B6XZQ7n.png">
+	  </p>
+	</section>
+	<section>
+	  <h2>Agenda</h2>
+	  <ul>
+	    <li>What is/Why Javascript?</li>
+	    <li>Hello Javascript</li>
+	    <li>Including it in your HTML project</li>
+	    <li>Tools and Resources</li>
+	    <li>Questions?</li>
+	  </ul>
+	</section>
+	<section>
+	  <section>
+	    <h2>What is Javascript?</h2>
+	    <ul>
+	      <li>Javascript is an interpreted Programming Language that web browsers can run</li>
+	      <li>It is dynamic, weakly-typed (duck-typed), has first class functions</li>
+	      <li>C-style syntax, supports Object-Oriented, functional, imperative programming</li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Why Javascript?</h2>
+	    <ul>
+	      <li>Enables User interactivity with your webpage</li>
+	      <li>Can do client-side manipulation. I.E. Modify what a certain user sees w/o affecting other users</li>
+	      <li>Allows asychronous communication between servers and other pages</li>
+	      <li>Alter your HTML document's content on the fly</li>
+	    </ul>
+	  </section>
+	</section>
+	<section>
+	  <section>
+	    <h2>Hello Javascript</h2>
+	    <pre><code>&lt;script&gt;
+document.getElementById("helloButton").click(function() {
+  alert("Hello Javascript!");
+})
+&lt;/script&gt;
+&lt;button id="helloButton"&gt;Hello Javascript!&lt;/button&gt;</code></pre>
+	    <button onclick="alert('Hello Javascript!')">Hello Javascript!</button>
+	  </section>
+	  <section>
+	    <h2>The Javascript Language: Syntax</h2>
+	    <ul>
+	      <li>
+		Weak typing like Python:
+		<pre><code class="js">var a = 3; // Make a variable 'a' with value 3
+
+/*  Make global variable b with value 'hello', don't need semicolon */
+b = 'hello'
+
+// Double quotes or single quotes for string
+name = "Chris " + 'Manghane'</code></pre>
+	      </li>
+	      <li>
+		Dicts and Lists:
+		<pre><code class="js">// Inline array initialization
+var primes = [2, 3, 5, 7, 9, 11, 13, 17, 19, 23];
+
+/* Dictionary to map any type to any type */
+var dictionary = {
+  'one' : 'Loneliest #',
+  'primes': primes,
+  'morePrimtes' : [27, 29, 31, 37],
+  'anotherDict' : { 'hello' : 'world' }
+}</code></pre>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Javascript Functions</h2>
+	    <ul>
+	      <li>
+		Javascript functions are first class objects:
+		<pre><code class="js">// Assign functions to variables
+var aFunction = function () {
+  alert('This will open a popup box');
+}
+
+// Pass in functions as arguments to functions
+var bFunction = function (anotherFunction) {
+  anotherFunction();
+}
+
+// Call the function with a function as a parameter
+bFunction(aFunction);
+
+// Function parameter could be an anonymous function.
+bFunction(function() {
+  alert('welp');
+});
+</code></pre>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Javascript Callbacks</h2>
+	    <ul>
+	      <li>
+		Some Javascript code runs asychronously, so how do I guarantee any order?
+		<pre><code class="js">// The second line could run before the click() function finishes.
+document.querySelector("button").click();
+alert('button has been clicked');</code></pre>
+	      </li>
+	      <li>
+		Every function call can take in an extra function argument, that will be ran once the function finishes: A callback
+		<pre><code class="js">// Now the alert will run when click finishes
+document.querySelector("button").click(function() {
+  alert('button has been clicked');
+});</code></pre>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Difference between == and ===</h2>
+	    <ul>
+	      <li>
+		In Javascript, there's a difference between '==' and '===', also between '!=' and '!==':
+		<pre><code class="js">'' == '0' // false
+0 == '' // true
+0 == '0' //true
+0 === '' // false
+0 === '0' // false</code></pre>
+	      </li>
+	      <li>'==' checks equality and tries to convert the RHS before comparison, so <code>0 == ''</code> is true since they both evaluate to <code>false</code> with coersion
+	      </li>
+	      <li>'===' checks absolute equality so <code>0 === '0'</code> if false</li>
+	    </ul>
+	  </section>
+	</section>
+	<section>
+	  <h2>Including JS in your HTML project</h2>
+	  <ul>
+	    <li>
+	      Very similar to how you include CSS:
+	      <pre><code class="html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type="text/js" src="main.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+	    </li>
+	    <li>
+	      You could inline it too:
+	      <pre><code class="html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type="text/js"&gt;
+      // Callback hell
+      a = function(function(function() {
+        alert('hello there');
+      }) {
+        alert('where am I?');
+      }) {
+        alert('top of function');
+      }
+    &lt;/script&gt;
+  &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+	    </li>
+	  </ul>
+	</section>
+	<section>
+	  <h2>Tools and Resources</h2>
+	  <ul>
+	    <li><a href="http://www.w3schools.com/js/">W3School's tutorial</a></li>
+	    <li><a href="http://jsfiddle.net/">JSFiddle live JS editing</a></li>
+	    <li><a href="http://plnkr.co/">Collaborative JS w/ Plunker</a></li>
+	    <li><a href="https://developer.mozilla.org/en-US/docs/JavaScript">Mozilla Javascript reference</a></li>
+	  </ul>
+	</section>
+	<section>
+	  <h2>Questions?</h2>
+	  <img src="http://24.media.tumblr.com/tumblr_m5drs3Q1yK1qgk1nqo1_500.png">
+	</section>
+      </div>
+    </div>
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.min.js"></script>
+    <script>
+      Reveal.initialize({
+
+	// Display controls in the bottom right corner
+	controls: true,
+
+	// Display a presentation progress bar
+	progress: true,
+
+	// Push each slide change to the browser history
+	history: false,
+
+	// Enable keyboard shortcuts for navigation
+	keyboard: true,
+
+	// Enable the slide overview mode
+	overview: true,
+
+	// Vertical centering of slides
+	center: true,
+
+	// Loop the presentation
+	loop: false,
+
+	// Change the presentation direction to be RTL
+	rtl: false,
+
+	// Number of milliseconds between automatically proceeding to the
+	// next slide, disabled when set to 0, this value can be overwritten
+	// by using a data-autoslide attribute on your slides
+	autoSlide: 0,
+
+	// Enable slide navigation via mouse wheel
+	mouseWheel: false,
+
+	// Apply a 3D roll to links on hover
+	rollingLinks: true,
+
+	// Transition style
+	transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+        dependencies : [
+	    { src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+	]
+      });
+    </script>
+    <script type="text/javascript" src="../reveal.js/plugin/zoom-js/zoom.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+      $("#unorderListCTRL button").click(function() {
+	  id = $(this).attr("id");
+	  $("#ulExample").css("list-style", id);
+      });
+      $("#orderListCTRL button").click(function() {
+          id = $(this).attr("id");
+          $("#olExample").css("list-style", id);
+      });
+
+      $("#linkExample a").removeClass("roll");
+      $("#linkExample a").html($("#linkExample span").text());
+      $("#linkExample a").attr("href", "#" + new Date().toString());
+      $("#linkExample span").remove();
+
+      $("#displayCTRL button").click(function() {
+          id = $(this).attr("id");
+          $("#displayExample div").css("display", id);
+      });
+
+      $("#fontCTRL button").click(function() {
+          id = $(this).attr("id").replace("_", " ");
+          $("#fontExample").css("font-family", id);
+          $("#fontExample code").css("font-family", id);
+      });
+    </script>
+  </body>
+</html>
