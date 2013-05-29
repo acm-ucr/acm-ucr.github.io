@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HOW DO I SHOT WEB(SITES) - Part 7</title>
+    <link rel="stylesheet" href="../reveal.js/css/reveal.min.css">
+    <link rel="stylesheet" href="../reveal.js/css/theme/beige.css" id="theme">
+    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+	<section>
+	  <img src="http://i.imgur.com/Y1DaqZD.jpg">
+	  <h2>Part 7: Javascript and jQuery: BFFs</h2>
+	  <p>
+	    Presented by <br>
+	    <img src="http://i.imgur.com/B6XZQ7n.png">
+	  </p>
+	</section>
+	<section>
+	  <h2>Agenda</h2>
+	  <ul>
+	    <li>What is/Why jQuery?</li>
+	    <li>Review of Selectors (important in jQuery)</li>
+	    <li>Adding interactivity with jQuery</li>
+	    <li>Loading content asychronously(AJAX)</li>
+	    <li>Tools and Resources</li>
+	    <li>Questions?</li>
+	  </ul>
+	</section>
+	<section>
+	  <section>
+	    <h2>What is jQuery?</h2>
+	    <ul>
+	      <li>jQuery is a fast, small, and feature-rich JavaScript library</li>
+	      <li>The "write less, do more" javascript framework</li>
+	      <li>Provides a javascript API that makes client-side javascript easier</li>
+	      <li>Provides similar APIs for user interface design (jQueryUI), mobile compatibility (jQueryMobile), unit testing (QUnit), and a css selector enginge (Sizzle)
+	    </ul>
+	    <a href="http://jquery.com/">
+	      <img src="http://ejohn.org/apps/workshop/adv-talk/jquery_logo.png">
+	    </a>
+	  </section>
+	  <section>
+	    <h2>Why jQuery?</h2>
+	    <ul>
+	      <li>Lightweight (32kB minified), CSS3 compliant, Cross-Browser support</li>
+	      <blockquote cite="http://www.sitepoint.com/jquery-used-on-50-percent-of-websites/">
+		jQuery is used on half of <b>all</b> websites
+	      </blockquote>
+	      <li>
+		Makes HTML document traversal and manipulation, event handling, and AJAX really easy
+	      </li>
+	    </ul>
+	    Compare the following examples:
+	    <div>
+	      <div>
+		<pre><code class="js">// Want to get text of element w/ ID = example
+console.log(document.getElementById("example").innerHTML);</code></pre>
+	      </div>
+	      <div>
+		<pre><code class="js">// Now again, with jQuery
+console.log($("#example").text());</code></pre>
+	      </div>
+	    </div>
+	    <img src="http://i.imgur.com/ghAFa7b.png">
+	  </section>
+	</section>
+	<section>
+	  <section>
+	    <h2>Review of CSS selectors w/ jQuery examples</h2>
+	    <ul>
+	      <li>
+		jQuery allows you to query the HTML document using <code>$</code>(called the "Bling" operator)
+		<pre><code class="js">// Outputs the HTML of any element with class
+// content inside of the body tag
+$("body .content").html();</code></pre>
+	      </li>
+	      <li>Notice the "Bling" operator takes in CSS Selectors as arguments</li>
+	      <li>This is one of the features of jQuery that makes it extremely powerful and easy to use</li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Basic Selectors w/ jQuery Syntax</h2>
+	    <ul>
+	      <li>
+		Target a certain HTML element
+		<pre><code class="javascript">$("button").css("text-decoration", "underline");</code></pre>
+	      </li>
+	      <li>
+		The most basic selectors
+		<pre><code class="javascript">// These will return a list of elements
+
+// Select all elements named "element"
+$("element");
+
+// Select all elements with an ID named "ID"
+$("#ID");
+
+// Select all elements with a class named "class"
+$(".class");</code></pre>
+	      </li>
+	      <li>
+		Selectors can be comma-separated
+		<pre><code class="javascript">// Applies to all buttons and headers
+$("h1, h2, h3, h4, h5, h6, button")
+    .css("background", "#2d6cc0")
+    .css("color", "white");</code></pre>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <ul>
+	      <li>
+		Wildcard selection
+		<pre><code class="javascript">// Selects everything
+$("*").css("display", "none");
+
+// Alternatively, `hide` does the same thing and you control the speed
+$("*").hide("slow");</code></pre>
+	      </li>
+	      <li>
+		Contextual Selection
+		<pre><code class="javascript">// Select all spans inside of divs
+$("div span");
+
+// Select all paragraphs whose parents are divs
+$("div > p");
+
+// Or, use `.children()` with a selector
+$("div").children("p");
+
+// Select all spans immediately after divs
+$("div + span");
+
+// Or, use `.after()` with a selector
+$("div").after("span");</code></pre>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <ul>
+	      <li>
+		Selection by attribute
+		<pre><code class="javascript">// Select every element with attribute "title"
+$("[title]");
+
+// Select every element with attribute "href" == "https://bit.ly"
+$("[href=https://bit.ly]");
+
+// Select every img with attribute "title" that has "hello"
+$("img[title~=hello]");</code></pre>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Pseudo-selectors</h2>
+	    <ul>
+	      <li>
+		Recall that with CSS we could select elements based on their state w/ pseudo-selectors
+		<pre><code class="css">/* Selects a button when it gets hovered */
+button:hover { background: #f1ab00; }</code></pre>
+	      </li>
+	      <li>
+		jQuery lets us leverage Javascript plus selectors to make it simpler and more powerful!
+		<pre><code class="javascript">$("button").hover(function() {
+    $(this).css("background", "#f1ab00");
+    alert("You hovered!");
+});</code></pre>
+		<button id="pseudoButton">Hover me!</button>
+	      </li>
+	    </ul>
+	  </section>
+	</section>
+	<section>
+	  <section id="showDemo">
+	    <h2>Adding interactivity to your page with jQuery</h2>
+	    <ul>
+	      <li>
+		As you saw in the last example, you can add logic to an element's state w/ jQuery
+	      </li>
+	      <li>
+		This is a common pattern in javascript web development
+	      </li>
+	      <li>
+		For example, show/hide on click:
+		<pre><code class="javascript">$("#showDemo button").click(function() {
+// Toggle switches between show and hide.
+$(this).prev().toggle("slow");
+});</code></pre>
+	      </li>
+	      <button>Click me</button>
+	      <li>
+		You can achieve different effects by calling <code>.show()</code> or <code>.hide()</code> separately, or
+		by using <code>.slideToggle()</code>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    Recall an example from the 4th workshop
+	    <hr>
+	    <div id="fontExample">
+	      <ul>
+		<li>
+		  In CSS, you can change the font of your text using the <code>font-family</code> rule:
+		  <pre><code class="css">#fontExample {
+  font-family: Arial, sans-serif;
+  font-family: Georgia, serif;
+		      
+  /* Don't really need the serif specification */
+  font-family: Times New Roman;
+}</code></pre>
+		</li>
+		<li>By default, this only works with standard browser fonts</li>
+	      </ul>
+	    </div>
+	    <hr>
+	    <div id="fontCTRL" class="buttonGroup">
+	      <button id="Times_New_Roman">Times New Roman</button>
+	      <button id="Georgia">Georgia</button>
+	      <button id="Arial">Arial</button>
+	      <button id="Palatino_Linotype">Palatino Linotype</button>
+	      <button id="Helvetica">Helvetica</button>
+	      <button id="Impact">Impact</button>
+	      <button id="Tahoma">Tahoma</button>
+	      <button id="Courier_New">Courier New</button>
+	      <button id="Verdana">Verdana</button>
+	      <button id="monospace">monospace</button>
+	    </div>
+	  </section>
+	  <section>
+	    Well, here's the jQuery code for that:
+	    <pre><code class="javascript">$("#fontCTRL button").click(function() {
+   /* All the buttons have an ID that corresponds to their font family
+     I replace spaces in the ID with underscores, so I replace those 
+     back */
+   id = $(this).attr("id").replace("_", " ");
+
+   // Now to actually change the font-family
+   $("#fontExample").css("font-family", id);
+   $("#fontExample code").css("font-family", id);
+});</code></pre>
+	    <ul>
+	      <li><code>.attr()</code> is from jQuery and allows you to access the element's attributes</li>
+	      <li>
+		<code>.css()</code> is from jQuery and allows you access certain css properties.
+		You can pass in one argument to access the value, or use two to change the value.
+	      </li>
+	      <li>
+		<code>.replace()</code> is from javascript and allows you to do a regex replace on a string
+	      </li>
+	    </ul>
+	  </section>
+	</section>
+	<section>
+	  <section>
+	    <h2>Loading content asychronously with javascript (AJAX)</h2>
+	    <ul>
+	      <li>
+		Ever wonder how Facebook and other sites refresh the page without you pressing anything?
+		That's AJAX
+	      </li>
+	      <li>
+		AJAX stands for Asychronous Javascript and XML, although people don't really use
+		XML anymore for transferring data (they use JSON instead).
+	      </li>
+	      <li>
+		AJAX allows you to ask an outside page for information with javascript and use the results
+		in whichever way you'd like. You can use a "GET" request to get data.
+	      </li>
+	      <li>
+		You can also use AJAX to submit data to another page without loading the page. You can use
+		a "POST" request to send data.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>A simple AJAX example</h2>
+	    <ul>
+	      <li>Say we wanted to replace the text in the box below with another website's content</li>
+	      <div id="ajaxDemo">Some random text</div>
+	      <button id="ajaxButton">Click here to change the text</button>
+	      <pre><code class="javascript">$("#ajaxButton").click(function() {
+   $.ajax({ url: "facebook.com" }).done(function(data) {
+       $("#ajaxDemo").html(data);
+   });
+});</code></pre>
+	    </ul>
+	  </section>
+	</section>
+	<section>
+	  <h2>Tools and Resources</h2>
+	  <ul>
+	    <li><a href="http://www.w3schools.com/js/">W3School's tutorial</a></li>
+	    <li><a href="http://jsfiddle.net/">JSFiddle live JS editing</a></li>
+	    <li><a href="http://plnkr.co/">Collaborative JS w/ Plunker</a></li>
+	    <li><a href="https://developer.mozilla.org/en-US/docs/JavaScript">Mozilla Javascript reference</a></li>
+	    <li><a href="http://jquery.com/">jQuery</a></li>
+	  </ul>
+	</section>
+	<section>
+	  <h2>Questions?</h2>
+	  <img src="http://blog.amyatlas.com/wp-content/uploads/2012/09/DE-ABRIL-A-JULIO-2012-181.jpg">
+	</section>
+      </div>
+    </div>
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.min.js"></script>
+    <script>
+      Reveal.initialize({
+
+	// Display controls in the bottom right corner
+	controls: true,
+
+	// Display a presentation progress bar
+	progress: true,
+
+	// Push each slide change to the browser history
+	history: false,
+
+	// Enable keyboard shortcuts for navigation
+	keyboard: true,
+
+	// Enable the slide overview mode
+	overview: true,
+
+	// Vertical centering of slides
+	center: true,
+
+	// Loop the presentation
+	loop: false,
+
+	// Change the presentation direction to be RTL
+	rtl: false,
+
+	// Number of milliseconds between automatically proceeding to the
+	// next slide, disabled when set to 0, this value can be overwritten
+	// by using a data-autoslide attribute on your slides
+	autoSlide: 0,
+
+	// Enable slide navigation via mouse wheel
+	mouseWheel: false,
+
+	// Apply a 3D roll to links on hover
+	rollingLinks: true,
+
+	// Transition style
+	transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+        dependencies : [
+	    { src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+	]
+      });
+    </script>
+    <script type="text/javascript" src="../reveal.js/plugin/zoom-js/zoom.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+      $("#pseudoButton").hover(function() {
+          $(this).css("background", "#f1ab00");
+          alert("You hovered!");
+      });
+
+      $("#showDemo button").click(function() {
+          // Toggle switches between show and hide.
+          $(this).prev().toggle("slow");
+      });
+
+      $("#fontCTRL button").click(function() {
+          id = $(this).attr("id").replace("_", " ");
+          $("#fontExample").css("font-family", id);
+          $("#fontExample code").css("font-family", id);
+      });
+
+      $("#ajaxButton").click(function() {
+          $.ajax({ type: "GET", url: "http://acm.frvl.us/articles/p/webworkshops" }).done(function(data) {
+              $("#ajaxDemo").html(data);
+          });
+      });
+    </script>
+  </body>
+</html>
